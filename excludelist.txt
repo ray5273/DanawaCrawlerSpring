@@ -1,0 +1,7 @@
+와인냉장고 (메이저 브랜드가 아님)
+버즈 (모델명 없음)
+휴대폰 (모델명 없음) 스마트폰,https://prod.danawa.com/list/?cate=12215709,20
+태블릿 (모델명 없음) 태블릿,https://prod.danawa.com/list/?cate=12210596,10
+메모리 (모델명 파싱 힘듬) 메모리,https://prod.danawa.com/list/?cate=112760,20
+워치 (모델명 없음) 워치,https://prod.danawa.com/list/?cate=12253476,10
+정수기 (확인안해봄) 정수기,https://prod.danawa.com/list/?cate=10248475,10
