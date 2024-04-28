@@ -1,10 +1,10 @@
-package com.woi.danawacrawler.danawa.category;
+package com.woi.danawacrawler.danawa.parse;
 
 
 import org.springframework.stereotype.Component;
 
 @Component
-public class ParseDryerModel implements ParseModel {
+public class ParseShoesDresserModel implements ParseModel {
 
 
     @Override

@@ -1,4 +1,4 @@
-package com.woi.danawacrawler.danawa.category;
+package com.woi.danawacrawler.danawa.parse;
 
 public class ModelNameAndProductName {
 

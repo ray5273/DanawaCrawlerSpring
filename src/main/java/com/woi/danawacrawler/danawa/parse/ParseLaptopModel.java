@@ -1,4 +1,4 @@
-package com.woi.danawacrawler.danawa.category;
+package com.woi.danawacrawler.danawa.parse;
 
 
 import org.springframework.stereotype.Component;

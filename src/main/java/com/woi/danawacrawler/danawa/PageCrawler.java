@@ -1,7 +1,8 @@
 package com.woi.danawacrawler.danawa;
 
 import com.woi.danawacrawler.DanawaCrawlerApplication;
-import com.woi.danawacrawler.danawa.category.*;
+import com.woi.danawacrawler.danawa.loadmodel.MatchModelName;
+import com.woi.danawacrawler.danawa.parse.*;
 import com.woi.danawacrawler.danawa.crawlingItem.CrawlingItem;
 import com.woi.danawacrawler.danawa.domain.DanawaProduct;
 import jakarta.persistence.EntityManager;
@@ -25,15 +26,17 @@ public class PageCrawler {
     private CrawlingItem crawlingItem;
     private ChromeDriver driver;
     private EntityManager em;
+    private List<MatchModelName> modelNameAndProductNames;
 
 
     private static final Logger logger = LoggerFactory.getLogger(DanawaCrawlerApplication.class);
 
 
-    public PageCrawler(CrawlingItem crawlingItem, ChromeDriver driver, EntityManager em) {
+    public PageCrawler(CrawlingItem crawlingItem, ChromeDriver driver, EntityManager em, List<MatchModelName> modelNameAndProductNames) {
         this.crawlingItem = crawlingItem;
         this.driver = driver;
         this.em = em;
+        this.modelNameAndProductNames = modelNameAndProductNames;
     }
 
     @Override
@@ -117,7 +120,20 @@ public class PageCrawler {
         } else if (crawlingItem.getCategory().contains("세탁기")) {
             parseModel = new ParseWashingMachineModel();
             logger.info("Washing machine category");
-        } else {
+        } else if (crawlingItem.getCategory().contains("스마트폰")){
+            parseModel = new ParseSmartphoneModel();
+            logger.info("Smartphone category");
+        } else if (crawlingItem.getCategory().contains("버즈")){
+            parseModel = new ParseBudsModel();
+            logger.info("Buds category");
+        } else if(crawlingItem.getCategory().contains("태블릿")){
+            parseModel = new ParseTabletModel();
+            logger.info("Tablet category");
+        }else if (crawlingItem.getCategory().contains("워치")){
+            parseModel = new ParseWatchModel();
+            logger.info("Watch category");
+        }
+        else {
             // 기본
             parseModel = new ParseDefaultModel();
         }
@@ -158,8 +174,10 @@ public class PageCrawler {
                 // 모델명과 제품명을 파싱
                 ParseModel parseModel = selectParsingModel();
 
-
                 ModelNameAndProductName mp = parseModel.parseModelNameAndProductName(productName);
+                if (mp == null) {
+                    mp = parseModel.parseModelNameAndProductNameByList(productName, modelNameAndProductNames);
+                }
 
                 List<WebElement> productPrices = product.findElements(By.xpath("./div/div[3]/ul/li"));
                 for (WebElement productPrice : productPrices) {

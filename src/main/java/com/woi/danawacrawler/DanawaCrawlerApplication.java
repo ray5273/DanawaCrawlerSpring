@@ -4,6 +4,9 @@ import com.woi.danawacrawler.danawa.PageCrawler;
 import com.woi.danawacrawler.danawa.crawlingItem.CrawlingItem;
 import com.woi.danawacrawler.danawa.crawlingItem.CrawlingItemReaderService;
 import com.woi.danawacrawler.danawa.domain.DanawaProduct;
+import com.woi.danawacrawler.danawa.loadmodel.MatchModelName;
+import com.woi.danawacrawler.danawa.loadmodel.MatchModelNameService;
+import com.woi.danawacrawler.danawa.parse.ModelNameAndProductName;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import jakarta.persistence.*;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -29,11 +32,17 @@ public class DanawaCrawlerApplication {
 		List<CrawlingItem> crawlingItems = crawlingItemReaderService.readCrawlingItems();
 
 		ChromeDriver driver = context.getBean(ChromeDriver.class);
+		MatchModelNameService matchModelNameService = context.getBean(MatchModelNameService.class);
+		List<MatchModelName> modelNameAndProductNames = matchModelNameService.getMatchModelName();
+//		for (MatchModelName modelNameAndProductName : modelNameAndProductNames) {
+//			logger.info("modelName: {}, productName: {}", modelNameAndProductName.getModelName(), modelNameAndProductName.getProductName());
+//		}
+
 
 		for (CrawlingItem crawlingItem : crawlingItems) {
 			logger.info("category: {}, url: {}, numPages: {}", crawlingItem.getCategory(), crawlingItem.getUrl(), crawlingItem.getNumPages());
 
-			PageCrawler pageCrawler = new PageCrawler(crawlingItem, driver, em);
+			PageCrawler pageCrawler = new PageCrawler(crawlingItem, driver, em,modelNameAndProductNames);
 			pageCrawler.crawl();
 
 		}

@@ -1,12 +1,11 @@
-package com.woi.danawacrawler.danawa.category;
+package com.woi.danawacrawler.danawa.parse;
 
 
 import org.springframework.stereotype.Component;
 
 @Component
-public class ParseShoesDresserModel implements ParseModel {
-
-
+public class ParseWashingMachineModel implements ParseModel {
+    // TV는 모델명이 반드시 마지막 split에 있음.
     @Override
     public ModelNameAndProductName parseModelNameAndProductName(String productString) {
 
