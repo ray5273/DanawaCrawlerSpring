@@ -20,13 +20,9 @@ public class DanawaProduct {
 
     public Integer price;
     public String option;
-    public LocalDateTime dateTime;
+    public String dateTime;
 
-    public LocalDateTime getDateTime() {
-        return dateTime;
-    }
-
-    public void setDateTime(LocalDateTime dateTime) {
+    public void setDateTime(String dateTime) {
         this.dateTime = dateTime;
     }
 

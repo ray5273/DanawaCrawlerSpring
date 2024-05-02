@@ -211,7 +211,7 @@ public class PageCrawler {
                     danawaProduct.setPrice(price);
                     danawaProduct.setOption(optionStr);
                     danawaProduct.setCategory(crawlingItem.getCategory());
-                    danawaProduct.setDateTime(java.time.LocalDateTime.now());
+                    danawaProduct.setDateTime(java.time.LocalDateTime.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 
                     em.persist(danawaProduct);
                     logger.info("product name: {}, price: {}, option: {}", productName, price, optionStr);
